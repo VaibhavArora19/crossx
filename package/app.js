@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const { exec } = require("child_process");
 const fs = require("fs");
 const path = require("path");
@@ -58,7 +60,7 @@ exec("npx hardhat compile", function (error, stdoutput, stderror) {
       // console.log("result is", result);
       console.info(
         "Deploy your contracts at",
-        `https://deployerx.vercel.app/deploy/${result}`
+        `https://crossx.vercel.app/deploy/${result}`
       );
     })
     .catch((err) => {

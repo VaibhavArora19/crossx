@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "node ../script/app.js"
+    "test": "node ../package/app.js"
   },
   "dependencies": {
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",
