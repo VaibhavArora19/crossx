@@ -47,7 +47,7 @@ const MultiChain = ({ formData, setFormData, page, setPage }) => {
 
   const nextPageHandler = () => {
     setFormData({ ...formData, multichains: chainSelected });
-    setPage((currPage) => currPage + 1);
+    setShowCompileModal(true);
   };
 
   const previousPageHandler = () => {
@@ -118,7 +118,7 @@ const MultiChain = ({ formData, setFormData, page, setPage }) => {
           Back
         </button>
         <button
-          onClick={() => setShowCompileModal(true)}
+          onClick={() => nextPageHandler()}
           type="button"
           className="py-3 px-7 rounded-md bg-[#161616] hover:bg-[#111111] text-gray-300 border border-gray-600"
         >
@@ -129,8 +129,8 @@ const MultiChain = ({ formData, setFormData, page, setPage }) => {
       {showCompileModal && (
         <DeployModal
           onClose={closeModalHandler}
-          // bytecode={bytecode}
-          // abi={abi}
+          bytecode={formData.bytecode}
+          abi={formData.abi}
           formData={formData}
           setFormData={setFormData}
         />

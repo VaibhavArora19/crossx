@@ -16,6 +16,8 @@ const index = () => {
     currentDeployChain: "",
     multichains: [],
     contractPasted: "",
+    bytecode: "",
+    abi: "",
   });
 
   const steps = ["Basic Details", "Choose Chain", "Multichain", "Deploy"];
@@ -55,7 +57,11 @@ const index = () => {
     try {
       const res = await fetch(`https://ipfs.io/ipfs/${hash}/contract.json`);
       const data = await res.json();
-      console.log("data is", data);
+      setFormData({
+        ...formData,
+        bytecode: data.bytecode,
+        abi: data.abi,
+      });
     } catch (err) {
       console.log("err is", err);
     }

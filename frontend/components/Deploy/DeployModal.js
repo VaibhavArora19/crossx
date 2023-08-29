@@ -2,10 +2,14 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { AiFillCopy, AiOutlineDeploymentUnit } from "react-icons/ai";
 import Loader from "../Loader/Loader";
-import { useContract, useSigner } from "wagmi";
+import { useContract, useContractWrite } from "wagmi";
+import { readContract, writeContract } from "@wagmi/core";
+
 import { ethers } from "ethers";
 import Confetti from "react-confetti";
 import { useWindowDimensions } from "@/constants/windowSize.js";
+import { waitForTransaction } from "@wagmi/core";
+
 import {
   deployerAbi,
   contractAddress,
@@ -13,6 +17,7 @@ import {
   rpcUrls,
 } from "@/constants";
 import { useRouter } from "next/router";
+import { data } from "autoprefixer";
 const Backdrop = ({ onClose }) => {
   return (
     <div
@@ -37,12 +42,11 @@ const DeployModal = ({
   const [isLoading, setIsLoading] = useState(false);
   const [salt, setSalt] = useState("");
   const [computedAddress, setComputedAddress] = useState("");
-  const { data: signer } = useSigner();
   const [txhash, setTxhash] = useState("");
-  const contract = useContract({
+  const { data, writeAsync: deploy } = useContractWrite({
     address: contractAddress,
     abi: deployerAbi,
-    signerOrProvider: signer,
+    functionName: "xDeployer",
   });
 
   const { height, width } = useWindowDimensions();
@@ -55,7 +59,13 @@ const DeployModal = ({
       }
       const abiCoder = new ethers.utils.AbiCoder();
       const saltbytes = abiCoder.encode(["uint256"], [salt]);
-      const address = await contract.computeAddress(saltbytes, bytecode);
+      const address = await readContract({
+        address: contractAddress,
+        abi: deployerAbi,
+        functionName: "computeAddress",
+        args: [saltbytes, bytecode],
+      });
+
       setComputedAddress(address);
     } catch (err) {
       console.log(err, "compute address");
@@ -70,6 +80,7 @@ const DeployModal = ({
     setGeneratingAddress(true);
     await computeAddress();
   };
+  console.log(formData, "multichains");
 
   const deployContractHandler = async () => {
     try {
@@ -77,6 +88,7 @@ const DeployModal = ({
         alert("Please enter salt");
         return;
       }
+      console.log(salt, "salt");
       setStartDeploying(true);
       //this function will add all the formdata to polybase
       const abiCoder = new ethers.utils.AbiCoder();
@@ -85,6 +97,7 @@ const DeployModal = ({
       let fees = [];
 
       let tx;
+      console.log(formData, "multichains");
       if (formData.multichains.length > 0) {
         let totalFee = ethers.utils.parseEther("0");
         for (let i = 0; i < formData.multichains.length; i++) {
@@ -96,25 +109,29 @@ const DeployModal = ({
         console.log(domains, "domains");
         console.log(fees, "fees");
         console.log(totalFee, "totalFee");
-        tx = await contract.xDeployer(
-          contractAddress,
-          domains,
-          saltbytes,
-          bytecode,
-          fees,
-          initializable,
-          initializableData,
-          totalFee,
-          {
-            value: totalFee,
-          }
-        );
-        console.log(tx, "tx");
+        console.log(saltbytes, "saltbytes");
+        const { hash } = await writeContract({
+          address: contractAddress,
+          abi: deployerAbi,
+          functionName: "xDeployer",
+          args: [
+            contractAddress,
+            domains,
+            saltbytes,
+            bytecode,
+            fees,
+            false,
+            "0x",
+            totalFee,
+          ],
+          value: totalFee,
+        });
+        console.log(hash, "tx");
+
+        // await waitForTransaction(data);
+        setTxhash(hash);
+        setDeploymentSuccess(true);
       }
-      await tx.wait();
-      setTxhash(tx.hash);
-      // addToPolybase();
-      setDeploymentSuccess(true);
     } catch (err) {
       console.log(err, "DeployContract");
       setStartDeploying(false);
