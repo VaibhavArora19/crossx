@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "inquirer": "^9.2.10",
+    "solc": "^0.8.21",
+    "web3.storage": "^4.5.5"
+  }
+}
