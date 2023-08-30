@@ -1,6 +1,8 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
+  const router = useRouter();
   return (
     <div className='flex items-center justify-between pt-1 px-20 mx-auto font-Poppins bg-black'>
       <Image
@@ -8,6 +10,10 @@ const Navbar = () => {
         height={150}
         width={150}
         alt='logo'
+        className='cursor-pointer'
+        onClick={() => {
+          router.push('/');
+        }}
       />
 
       <button
