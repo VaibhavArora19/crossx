@@ -1,8 +1,10 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import polygonSvg from "../../public/assets/deploy/polygon.svg";
+import avaImg from "../../public/assets/deploy/avalanche.png";
 import optimismImg from "../../public/assets/deploy/optimism.png";
-import fvmImg from "../../public/assets/deploy/fvm.png";
+import bnbImg from "../../public/assets/deploy/bnb.png";
+import arbImg from "../../public/assets/deploy/arbitrium.svg";
 
 const Backdrop = ({ onClose }) => {
   return (
@@ -15,20 +17,29 @@ const Backdrop = ({ onClose }) => {
 
 const chains = [
   {
+    id: "97",
+    chainImg: bnbImg,
+    chainName: "BSC Testnet",
+  },
+  {
     id: "80001",
     chainImg: polygonSvg,
     chainName: "Polygon Mumbai",
   },
-
+  {
+    id: "43113",
+    chainImg: avaImg,
+    chainName: "Avalanche Fuji",
+  },
+  {
+    id: "421613",
+    chainImg: arbImg,
+    chainName: "Arbitrum Goerli",
+  },
   {
     id: "420",
     chainImg: optimismImg,
     chainName: "Optimism Goerli",
-  },
-  {
-    id: "3141",
-    chainImg: fvmImg,
-    chainName: "FVM Hyperspace",
   },
 ];
 
