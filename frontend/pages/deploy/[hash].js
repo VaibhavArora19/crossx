@@ -53,25 +53,25 @@ const index = () => {
     }
   };
 
-  const getData = async () => {
-    try {
-      const res = await fetch(`https://ipfs.io/ipfs/${hash}/contract.json`);
-      const data = await res.json();
-      setFormData({
-        ...formData,
-        bytecode: data.bytecode,
-        abi: data.abi,
-      });
-    } catch (err) {
-      console.log("err is", err);
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const res = await fetch(`https://ipfs.io/ipfs/${hash}/contract.json`);
+  //     const data = await res.json();
+  //     setFormData({
+  //       ...formData,
+  //       bytecode: data.bytecode,
+  //       abi: data.abi,
+  //     });
+  //   } catch (err) {
+  //     console.log("err is", err);
+  //   }
+  // };
 
-  useEffect(() => {
-    if (hash) {
-      getData();
-    }
-  }, [hash]);
+  // useEffect(() => {
+  //   if (hash) {
+  //     getData();
+  //   }
+  // }, [hash]);
 
   return (
     <div className="bg-[#171717] min-h-screen flex items-center justify-center py-32">
