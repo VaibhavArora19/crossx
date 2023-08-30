@@ -11,11 +11,11 @@ const About = () => {
         <div className='flex-[0.5]'>
           <div className='h-[550px] rounded-3xl bg-[#7CFEA2] p-10 mb-10 relative overflow-hidden'>
             <p className='text-3xl text-black font-Poppins font-semibold mb-4'>
-              An unique concept of creating smartcontracts with AI!
+              Multi chain is fun, eh?{' '}
             </p>
             <p className='text-black font-Poppins text-thin'>
-              Forget about writing hectic code! Create contracts with simple
-              prompts and enjoy the beauty of our platform
+              Tired of managing different address of same contracts over
+              multiple chains?
             </p>
 
             <Image
@@ -36,16 +36,15 @@ const About = () => {
             />
 
             <p className='font-semibold font-Poppins text-2xl mb-1 text-white'>
-              Already have a contract? Deploy here
+              What you have to do?
             </p>
             <p className='font-thin mb-8 text-white'>
-              Have a pre-written contract in cadence and struggling to deploy?
-              Use our dapp for easy deployment and management!
+              Just select chains you want to deploy! That's pretty much it 🛸
             </p>
 
             <p
               onClick={() => {
-                router.push('/deploy');
+                router.push('/');
               }}
               className='flex items-center hover:text-[#7CFEA2] cursor-pointer text-white'>
               Deploy here{' '}
@@ -58,26 +57,27 @@ const About = () => {
 
         {/* Right */}
         <div className='flex-[0.5]'>
-          <div className='bg-[#121212] h-[300px] rounded-3xl p-10 mb-10  border-[0.5px] border-gray-600'>
+          <div className='bg-[#121212] h-[300px] rounded-3xl p-8 mb-10  border-[0.5px] border-gray-600'>
             <Image
               src='/about1.svg'
               alt='image'
               height={40}
               width={60}
-              className='mb-10'
+              className='mb-6'
             />
 
-            <p className='font-semibold font-Poppins text-2xl mb-1 text-white'>
-              Create contracts on cadence with AI.
+            <p className='font-semibold font-Poppins text-2xl mb-2 text-white'>
+              Use our easy to use CLI to deploy any contract at ease!
             </p>
-            <p className='font-thin mb-8 text-white'>
-              building on flow? Struggling with cadence? Use our dapp to build
-              and deploy contracts using <strong>GPT3</strong>!
+            <p className='font-thin mb-5 text-white'>
+              Use our Deployer to deploy your smartcontracts on not only one but
+              multiple chain, that also with
+              <strong> only one contract address! </strong>!
             </p>
 
             <p
               onClick={() => {
-                router.push('/create');
+                router.push('/');
               }}
               className='flex items-center hover:text-[#7CFEA2] cursor-pointer text-white'>
               Try here{' '}
@@ -97,11 +97,11 @@ const About = () => {
 
             <div className='self-end'>
               <p className='text-3xl text-black font-Poppins font-semibold mb-4 '>
-                Deploying contracts with scripts and CLI is too hectic?
+                Select from the wide range of evm chains!{' '}
               </p>
               <p className='text-black font-Poppins text-thin'>
-                Use Flowweb's deployer to deploy your smartcontracts in a breeze
-                and embrace the power of our dapp!
+                Our dapp supports almost all the evm chains along with the
+                testnet to provide developers an ease.
               </p>
             </div>
           </div>
@@ -119,20 +119,19 @@ const About = () => {
           />
 
           <p className='font-semibold font-Poppins text-2xl mb-1 text-white'>
-            Manage your existing contracts with our very own explorer!
+            Generate single contract address for all the chains you've deployed!
           </p>
           <p className='font-thin mb-8 w-[550px] text-center text-white'>
-            Deployed contracts with our platform? Just simply search your
-            address on explorer and get all the deployed contracts at a single
-            place!
+            Yess you read it right. One address for every fuckin chain out
+            there! so why miss the fun? Start deploying today
           </p>
 
           <p
             onClick={() => {
-              router.push('/explorer');
+              router.push('/');
             }}
             className='flex items-center text-white hover:text-[#7CFEA2] cursor-pointer'>
-            Use Explorer{' '}
+            Try here
             <span>
               <BsArrowRightShort size={25} />
             </span>
