@@ -52,7 +52,7 @@ const index = () => {
       );
     }
   };
-
+  //hehe
   // const getData = async () => {
   //   try {
   //     const res = await fetch(`https://ipfs.io/ipfs/${hash}/contract.json`);
