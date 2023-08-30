@@ -2,27 +2,23 @@ import Image from "next/image";
 import React, { use, useEffect, useState } from "react";
 import { GiBreakingChain } from "react-icons/gi";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
-import bnb from "../../public/assets/deploy/bnb.png";
+import polygonSvg from "../../public/assets/deploy/polygon.svg";
 import ChainModal from "./ChainModal";
 import { useWeb3Modal } from "@web3modal/react";
 import { useAccount } from "wagmi";
 import { useNetwork, useSwitchNetwork } from "wagmi";
 import DeployModal from "./DeployModal";
-
 import {
   polygonMumbai,
-  scrollTestnet,
-  filecoinHyperspace,
-  gnosisChiado,
   optimismGoerli,
-  zkSyncTestnet,
+  avalancheFuji,
+  bscTestnet,
+  arbitrumGoerli,
 } from "wagmi/chains";
-import { Mantle } from "@/constants";
 
 const SelectChain = ({ setPage, page, formData, setFormData }) => {
   const { chain: connectChain } = useNetwork();
   const [showCompileModal, setShowCompileModal] = useState(false);
-
   const { chains, error, isLoading, pendingChainId, switchNetwork } =
     useSwitchNetwork();
 
@@ -30,9 +26,9 @@ const SelectChain = ({ setPage, page, formData, setFormData }) => {
   const [isSinlgeChain, setIsSingleChain] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [chain, setChain] = useState({
-    chainId: "97",
-    chainName: "BSC Testnet",
-    chainImg: bnb,
+    chainId: "",
+    chainName: "",
+    chainImg: "",
   });
 
   const { isOpen, open, close, setDefaultChain } = useWeb3Modal();
@@ -40,16 +36,55 @@ const SelectChain = ({ setPage, page, formData, setFormData }) => {
 
   const connectWalletHandler = async () => {
     try {
+      if (chain.chainName === "Polygon Mumbai") {
+        setDefaultChain(polygonMumbai);
+      }
+      if (chain.chainName === "Avalanche Fuji") {
+        setDefaultChain(avalancheFuji);
+      }
+      if (chain.chainName === "BSC Testnet") {
+        setDefaultChain(bscTestnet);
+      }
+
+      if (chain.chainName === "Optimism Goerli") {
+        setDefaultChain(optimismGoerli);
+      }
+
+      if (chain.chainName === "Arbitrum Goerli") {
+        setDefaultChain(arbitrumGoerli);
+      }
       await open();
     } catch (err) {
       console.log(err, "wallet  connected");
     }
   };
 
+  const getChainInfo = () => {
+    if (chain.chainName === "Polygon Mumbai") {
+      return polygonMumbai;
+    } else if (chain.chainName === "Avalanche Fuji") {
+      return avalancheFuji;
+    } else if (chain.chainName === "BSC Testnet") {
+      return bscTestnet;
+    } else if (chain.chainName === "Optimism Goerli") {
+      return optimismGoerli;
+    } else if (chain.chainName === "Arbitrum Goerli") {
+      return arbitrumGoerli;
+    }
+  };
+
   useEffect(() => {
     if (connectChain) {
       if (connectChain.name !== chain.chainName) {
-        switchNetwork(Number(chain.chainId));
+        try {
+          switchNetwork(Number(chain.chainId));
+        } catch (err) {
+          console.log("started");
+          window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [getChainInfo()],
+          });
+        }
       }
     }
   }, [connectChain, chain]);
@@ -75,7 +110,7 @@ const SelectChain = ({ setPage, page, formData, setFormData }) => {
     }
 
     if (isSinlgeChain) {
-      setShowCompileModal(true);
+      setPage((currPage) => currPage + 2);
     } else if (isMultichain) {
       setPage((currPage) => currPage + 1);
     } else {
@@ -103,14 +138,25 @@ const SelectChain = ({ setPage, page, formData, setFormData }) => {
         <p className="text-sm text-gray-400 mb-1">Deploy From</p>
 
         <div
+          onClick={openModalHandler}
           className="py-3 px-3 border border-gray-700 rounded-md flex justify-between mb-6 hover:bg-[#272626] cursor-pointer"
-          onClick={() => setOpenModal(true)}
         >
           <div className="flex gap-2">
-            <Image src={bnb} alt={bnb} width={40} height={40} />
-
+            {chain.chainImg != "" && (
+              <Image
+                src={!chain.length ? chain.chainImg : polygonSvg}
+                alt={!chain.length ? chain.chainName : "Chain"}
+                width={40}
+                height={40}
+              />
+            )}
             <div className="flex items-center">
-              <h3 className="font-semibold ml-2">BSC Testnet</h3>
+              <h3 className="font-semibold ml-2">
+                {chain.chainName != "" ? chain.chainName : "Select chain"}
+              </h3>
+              {/* <p className="text-[12px] tracking-wide text-gray-500">
+                {!chain.length ? chain.chainAdd : "0x00000000000000000000000"}
+              </p> */}
             </div>
           </div>
 
