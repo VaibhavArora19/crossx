@@ -3,7 +3,7 @@ pragma solidity ^0.8.17;
 import {AxelarExecutable} from "./AxelarExecutable.sol";
 import {Create2} from "@openzeppelin/contracts/utils/Create2.sol";
 
-contract DeployerX is AxelarExecutable {
+contract CrossX is AxelarExecutable {
     // This function is used to deploy the contract across multiple chains
     // @param target - the address of the target contract
     // @param destinationDomain - a array of the destination chain IDs

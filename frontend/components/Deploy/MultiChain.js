@@ -21,23 +21,18 @@ const chains = [
   {
     id: "43113",
     chainImg: avaImg,
-    chainName: "Avalanche",
+    chainName: "Avalanche Fuji",
   },
   {
     id: "421613",
     chainImg: arbImg,
-    chainName: "Arbitrum",
+    chainName: "Arbitrum Goerli",
   },
   {
     id: "420",
     chainImg: optimismImg,
     chainName: "Optimism Goerli",
   },
-  // {
-  //   id: "3141",
-  //   chainImg: fvmImg,
-  //   chainName: "FVM Hyperspace",
-  // },
 ];
 
 const MultiChain = ({ formData, setFormData, page, setPage }) => {

@@ -106,6 +106,8 @@ const DeployModal = ({
           totalFee = totalFee.add(fees[i]);
         }
 
+        console.log(domains);
+
         const { hash } = await writeContract({
           address: contractAddress,
           abi: deployerAbi,

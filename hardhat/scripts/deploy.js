@@ -16,7 +16,7 @@ async function main() {
     "0x13b0D85CcB8bf860b6b79AF3029fCA081AE9beF2"
   );
 
-  const XDeployer = await hre.ethers.getContractFactory("DeployerX");
+  const XDeployer = await hre.ethers.getContractFactory("CrossX");
   const salt =
     "0x0001000000000000000000000000000000000110000000000001110001011010";
   console.log("salt", salt);

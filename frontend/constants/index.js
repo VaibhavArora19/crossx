@@ -2,10 +2,9 @@ export const contractAddress = "0xfE72897d882c3b3d3396012684bED9D7a2e60648";
 export const axelarDomains = {
   "Optimism Goerli": "optimism",
   "Polygon Mumbai": "Polygon",
-  Avalanche: "avalanche",
-  Arbitrum: "arbitrum",
+  "Avalanche Fuji": "Avalanche",
+  "Arbitrum Goerli": "arbitrum",
   "BSC Testnet": "binance",
-  "FVM Hyperspace": "filecoin",
 };
 
 export const deployerAbi = [

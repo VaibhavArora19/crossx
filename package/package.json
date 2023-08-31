@@ -1,5 +1,5 @@
 {
-  "name": "crossx-cli",
+  "name": "crossx",
   "version": "0.1.1",
   "description": "multichain deployment tool",
   "main": "app.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VaibhavArora19/crossx-cli/package"
+    "url": "git+https://github.com/VaibhavArora19/crossx/tree/main/package"
   },
   "bin": "./app.js",
   "keywords": [
@@ -19,13 +19,13 @@
   "author": "crossx_team",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/VaibhavArora19/crossx-cli/package"
+    "url": "https://github.com/VaibhavArora19/crossx/tree/main/package"
   },
-  "homepage": "https://github.com/VaibhavArora19/crossx-cli/package",
+  "homepage": "https://github.com/VaibhavArora19/crossx/tree/main/package",
   "dependencies": {
     "child_process": "^1.0.2",
     "inquirer": "^9.2.10",
-    "solc": "^0.8.18",
+    "solc": "0.8.18",
     "web3.storage": "^4.5.5"
   },
   "shell": "/bin/bash"
